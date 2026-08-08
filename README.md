@@ -1,201 +1,130 @@
-#  CEN 352 – Artificial Intelligence  
-##  Term Project: Mental Health Prediction System
+# Wine Classification and Dimensionality Reduction using PCA
 
----
+A data mining project that applies Principal Component Analysis (PCA) to the Wine dataset to explore dimensionality reduction, visualize the data in a lower-dimensional space, and evaluate its effect on classification performance.
 
-##  Group Members and Roles
+## Project Overview
 
-**Nikol Dalipi**  
-- Data preprocessing and dataset analysis  
-- Rule-based system design  
-- Evaluation and result interpretation  
+The Wine dataset contains 178 samples described by 13 numerical features and divided into three different classes.
 
-**Noel Zani**  
-- Random Forest model implementation  
-- Model training and testing  
-- Streamlit application development  
+The main objectives of this project are to:
 
-> The project was developed collaboratively; responsibilities may overlap.
+- Load and preprocess the Wine dataset.
+- Standardize the numerical features before applying PCA.
+- Apply Principal Component Analysis to reduce dimensionality.
+- Analyze the cumulative explained variance of the principal components.
+- Visualize the dataset using a two-dimensional PCA projection.
+- Determine the number of components required to retain at least 95% of the variance.
+- Compare Logistic Regression classification performance before and after dimensionality reduction.
 
----
+## Technologies Used
 
-##  Project Overview
-
-This project focuses on the design and evaluation of an intelligent agent for employee attrition prediction.  
-The goal is to classify employees into one of the following categories:
-
-- 🔴 Stressed  
-- 🟠 At Risk
-- 🟢 Healthy
-
-The project implements and evaluates two different AI techniques taught in the course and compares their performance on the same dataset.
-
----
-
-##  AI Techniques Implemented
-
-###  Rule-Based System (Logical Reasoning)
-
-A rule-based system was developed using manually defined rules and thresholds derived from training data statistics.
-
-Key characteristics:
-- Deterministic and interpretable decisions  
-- Explicit representation of domain knowledge  
-- Symbolic reasoning approach  
-
-Why this method was chosen:  
-Rule-based systems are a core topic in the course and provide transparent decision logic.
-
----
-
-###  Random Forest Classifier (Statistical Learning)
-
-A Random Forest classifier was implemented and trained on the dataset after preprocessing and class balancing.
-
-Key characteristics:
-- Ensemble learning using multiple decision trees  
-- Handles non-linear feature interactions  
-- Robust to overfitting and noise  
-
-Why this method was chosen:  
-Random Forest is a powerful statistical learning algorithm covered in the course syllabus.
-
----
-
-##  Model Usage and Comparison
-
-The two AI techniques are implemented and evaluated independently.  
-They are not combined into a hybrid system.
-
-This allows:
-- Fair comparison of symbolic and statistical approaches  
-- Clear analysis of strengths and weaknesses  
-- Compliance with the requirement of using multiple AI techniques  
-
----
-
-##  Dataset Description
-
-The dataset contains employee-related features such as workload indicators, satisfaction levels, and performance attributes.
-
-Dataset characteristics:
-- Realistic and socially relevant  
-- Highly imbalanced  
-- Suitable for both rule-based and machine learning approaches  
-
----
-
-##  Evaluation Methodology
-
-Because the dataset is imbalanced, accuracy alone is not sufficient.
-
-Evaluation metrics used:
-- Precision  
-- Recall  
-- F1-score  
-- ROC-AUC  
-- Confusion Matrix  
-
-These metrics align with the Performance (P) component of the PEAS framework.
-
----
+- Python
+- Pandas
+- NumPy
+- Scikit-learn
+- Matplotlib
 
 ## Project Structure
 
-AI-Project-Demo/  
-│  
-├── src/  
-│   ├── preprocessing.py  
-│   ├── rule_based.py  
-│   ├── random_forest.py  
-│   └── app.py  
-│  
-├── models/  
-│   └── random_forest_model.pkl  
-│   └── encoding_metadata.pkl  
-│   └── label_encoder.pkl  
-│   └── feature_names.pkl  
-│   └── scaler.pkl  
-│   └── test_results.pkl  
-│  
-├── data/  
-│   └── mental_health_social_media_dataset.csv  
-│  
-├── requirements.txt  
-└── README.md  
+```text
+data_mining_project/
+├── data/
+│   └── wine.data.csv
+├── data_loader.py
+├── preprocessing.py
+├── pca_analysis.py
+├── visualisation.py
+├── main.py
+└── README.md
+```
 
----
+### File Description
 
-##  Virtual Environment (venv)
+- `data_loader.py` – Loads the Wine dataset and prepares the feature and target variables.
+- `preprocessing.py` – Standardizes the dataset before PCA.
+- `pca_analysis.py` – Performs PCA and calculates explained variance.
+- `visualisation.py` – Generates the cumulative explained variance and 2D PCA plots.
+- `main.py` – Runs the complete analysis and classification workflow.
+- `data/wine.data.csv` – Dataset used for the analysis.
 
-A virtual environment is used to isolate project dependencies and ensure reproducibility.
+## PCA Analysis
 
-Why venv is used:
-- Prevents dependency conflicts  
-- Ensures consistent library versions  
-- Makes the project reproducible  
+Principal Component Analysis is used to transform the original 13 features into a smaller set of principal components while retaining as much of the original information as possible.
 
----
+The project analyzes the cumulative explained variance to determine how many principal components are required to preserve at least 95% of the dataset's variance.
 
-##  How to Run the Project
+A two-dimensional PCA projection is also generated to visualize the distribution of the three wine classes.
 
-1. Clone the repository  
-   $ git clone <repository-link>  
-   $ cd cen352-term-project-2025-26-nikol-noel 
+## Classification
 
-2. Create and activate a virtual environment
-   $ python -m venv venv  
-   $ source venv/bin/activate        (macOS/Linux)  
-   $ venv\Scripts\activate           (Windows)  
+Logistic Regression is used to evaluate classification performance in two scenarios:
 
-3. Install dependencies  
-   $ pip install -r requirements.txt  
+1. Using the original standardized features.
+2. Using the PCA-transformed features.
 
-4. Run the models  
-   $ python src/main.py  
+This comparison demonstrates how dimensionality reduction affects the predictive performance of the classifier.
 
-5. Run the Streamlit application  
-   $ streamlit run src/app.py  
+## Results
 
----
+The analysis produced the following results:
 
-##  Agent Design
+- Dataset size: **178 samples**
+- Original features: **13**
+- Wine classes: **3**
+- Components required for approximately 95% explained variance: **10**
+- Variance explained by the first two principal components: **~55.4%**
+- Logistic Regression accuracy using original features: **~97.78%**
+- Logistic Regression accuracy after PCA: **~97.78%**
 
-Agent types:
-- Symbolic agent (Rule-Based System)  
-- Learning agent (Random Forest)  
+The results show that PCA reduced the dimensionality of the dataset while maintaining the same classification accuracy in this experiment.
 
-Environment: Partially observable, static  
-Sensors: Dataset features  
-Actuators: Classification decisions  
+## Running the Project
 
----
+Clone the repository and navigate to the project directory:
 
-##  Future Work
+```bash
+git clone <repository-url>
+cd data_mining_project
+```
 
-- Add additional classifiers for comparison  
-- Improve rule calibration  
-- Introduce explainability techniques  
-- Explore hybrid integration as an extension  
+Create and activate a virtual environment:
 
----
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+```
 
-##  Libraries Used
+Install the required dependencies:
 
-- scikit-learn  
-- pandas  
-- numpy  
-- imbalanced-learn  
-- streamlit  
-- joblib  
+```bash
+pip install numpy pandas scikit-learn matplotlib
+```
 
-All code was developed by the project members.
+Run the project:
 
----
+```bash
+python main.py
+```
 
-##  Compliance Summary
+The program will display the analysis results in the terminal and generate visualizations for the cumulative explained variance and the 2D PCA projection.
 
-✔ Two AI techniques implemented  
-✔ Python-based solution  
-✔ Quantitative evaluation   
-✔ Reproducible execution instructions provided  
+## Key Concepts
+
+This project demonstrates several fundamental data mining and machine learning concepts, including:
+
+- Data preprocessing
+- Feature standardization
+- Principal Component Analysis (PCA)
+- Dimensionality reduction
+- Explained variance
+- Data visualization
+- Logistic Regression
+- Classification evaluation
+
+## Dataset
+
+The project uses the Wine dataset, which contains chemical analysis measurements of wines belonging to three different classes.
+
+## Author
+
+Noel Zani
